@@ -6,7 +6,7 @@ dotenv.load();
 var app = express();
 var PORT = Number(process.env.PORT || 9222);
 var HOST = process.env.HOST || 'localhost';
-var CUR_HOST = "localhost";
+var CUR_HOST = process.env.CUR_HOST || "localhost";
 
 var ALLEVENTS = [
 	'processed', 'delivered', 'open',
