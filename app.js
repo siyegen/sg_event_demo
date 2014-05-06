@@ -34,6 +34,7 @@ var sendgrid = require('sendgrid')(sg_user, sg_key);
 app.use(express.bodyParser());
 app.use(express.errorHandler());
 app.use(express.logger());
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 app.locals({"notice": false});
 
@@ -61,6 +62,11 @@ app.post('/users', function(req, res) {
 
 // Link for users to visit
 app.get('/sale/:code', function(req, res) {
+	res.send(req.params.code, 200);
+});
+
+app.post('/sale/:code', function(req, res) {
+	var code = req.params.code;
 	res.send(req.params.code, 200);
 });
 

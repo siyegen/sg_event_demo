@@ -1,15 +1,26 @@
-!!! 5
-html
-	body
-		- if (locals.users)
-			div= "Send #" + locals.uuid
-				ul
-				each user in locals.users
-					li
-						each val, name in user
-							= name
-							= ": " + val +" "
-		- else if (locals.sends)
-			ul
-			each send in locals.sends
-				li= send
+extends layout
+
+block content
+  - if (locals.users)
+    div= "Send #" + locals.uuid
+    ul
+      each user in locals.users
+        div.panel.panel-default
+          div.panel-heading= "Email: " + user.email
+          div.panel-body
+            each val, name in user
+              div
+                if val == "false"
+                  span.label.label-warning
+                    =name + ": "
+                    =val
+                else
+                  span.label.label-success
+                    =name + ": "
+                    =val
+  - else if (locals.sends)
+    h1 All Sends
+    ul
+      each send in locals.sends
+        li
+          a(href='/stats/'+send)= send

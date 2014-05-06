@@ -1,9 +1,10 @@
-!!! 5
-html
-	body
-		"All Users"
-		- if (locals.notice)
-			div added user
-		- if (locals.users)
-			each user in users
-				div= user.username
+extends layout
+
+block content
+  "All Users"
+  - if (locals.notice)
+    div added user
+  - if (locals.users)
+    each user in users
+      div= user.username
+      = user.email
