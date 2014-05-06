@@ -183,7 +183,7 @@ app.post('/sg_event', function(req, res) {
 	var data = {
 		uuid: uuid,
 		email: sg_data['email'],
-		coupon_code: sg_data['code'],
+		coupon_code: sg_data['coupon_code'],
 	};
 	data[sg_event] = true;
 	console.log("Setting data for", hash_key);
