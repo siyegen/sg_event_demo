@@ -1,0 +1,13 @@
+!!! 5
+html
+	body
+		- if (locals.users)
+			form(name="send", action="/send", method="post")
+				each user in users
+					div
+						input(type='checkbox', name="emails", value=user.email, checked)
+						= user.username
+						= " ("+user.email+")"
+				label(for="code") Coupon Code
+				input(type="text", name="code", id="code", required)
+				input(type="submit", value="send")

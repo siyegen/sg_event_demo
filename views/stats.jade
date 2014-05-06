@@ -1,0 +1,15 @@
+!!! 5
+html
+	body
+		- if (locals.users)
+			div= "Send #" + locals.uuid
+				ul
+				each user in locals.users
+					li
+						each val, name in user
+							= name
+							= ": " + val +" "
+		- else if (locals.sends)
+			ul
+			each send in locals.sends
+				li= send
