@@ -6,7 +6,7 @@ dotenv.load();
 var app = express();
 var PORT = Number(process.env.PORT || 9222);
 var HOST = process.env.HOST || 'localhost';
-var CUR_HOST = process.env.CUR_HOST || "localhost";
+var CUR_HOST = process.env.CUR_HOST || "localhost/";
 
 var ALLEVENTS = [
 	'processed', 'delivered', 'open',
@@ -89,6 +89,7 @@ app.post('/send', function(req, res) {
 				html: getHtml(coupon_code),
 			});
 			email_send.addUniqueArg({"uuid":uuid});
+			email_send.addUniqueArg({"coupon_code":coupon_code});
 			sendgrid.send(email_send, function(err, json){
 				if (err){
 					console.error(err);
@@ -195,7 +196,7 @@ app.listen(PORT);
 console.log("Starting on", HOST, PORT);
 
 function getHtml(coupon_code) {
-	var link = CUR_HOST+"/sale/"+coupon_code;
+	var link = CUR_HOST+"sale/"+coupon_code;
 	return 'Check out this great sale!<br>'+
 			'<a href="'+link+'">Here!</a>';
 }
