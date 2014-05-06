@@ -16,9 +16,15 @@ var ALLEVENTS = [
 
 var REDISHOST = process.env.REDISHOST;
 var REDISPORT = process.env.REDISPORT;
-var redis = require('redis');
-var client = redis.createClient(REDISPORT,REDISHOST);
 var redis_namespace = "SGEVENT";
+var redis = require('redis');
+if (process.env.REDISTOGO_URL) {
+    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+	var client = redis.createClient(rtg.port, rtg.hostname);
+	client.auth(rtg.auth.split(":")[1]);
+} else {
+	var client = redis.createClient(REDISPORT,REDISHOST);
+}
 
 var sg_user = process.env.SENDGRID_USERNAME;
 var sg_key = process.env.SENDGRID_PASSWORD;
